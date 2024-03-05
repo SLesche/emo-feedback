@@ -1,0 +1,24 @@
+/* styles.css */
+
+body {
+    background-color: lightgrey;
+    color: black;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+  }
+  
+.task-stim {
+    font-size: 60px;
+}
+
+.feedback-stim {
+    font-size: 60px;
+}
+
+.normal-text {
+    font-size: 28px;
+    line-height: 1.2;
+    width: 70%;
+    margin: 0 auto;
+}

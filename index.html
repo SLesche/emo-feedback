@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><script>experiment_name</script></title>
+    <meta charset="UTF-8">
+    <script src="jspsych/dist/jspsych.js"></script>
+    <script src="jspsych/dist/plugin-html-keyboard-response.js"></script>
+    <script src="jspsych/dist/plugin-html-button-response.js"></script>
+    <script src="jspsych/dist/plugin-instructions.js"></script>
+    <script src="jspsych/dist/plugin-survey.js"></script>
+    <link href="jspsych/dist/jspsych.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/rat_styles.css">
+    <script src="scripts/helper_function.js"></script>
+    <script src="scripts/task.js"></script>
+    <script src="scripts/setup.js"></script>
+    <script src="scripts/instructions.js"></script>
+    <script src="scripts/debriefing.js"></script>
+  </head>
+  <body></body>
+  <script>  
+    var trial = {
+      type: partnerFlanker,
+      stimulus: function(){
+          return stim
+      },
+      choices: possible_response_keys,
+      stimulus_duration: stim_duration,
+      trial_duration: trial_duration, // Adjust as needed
+      response_ends_trial: true,
+      on_finish: function(data) {
+      }
+    };
+
+    var feedback = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: function(){
+        const last_trial_correct = jsPsych.data.get().last(1).values()[0].accuracy;
+        const last_response = jsPsych.data.get().last(1).values()[0].response;
+        let feedback_msg = "";
+        let correct_feedback = "Richtig";
+        let false_feedback = "Falsch";
+        if (is_experimental){
+          false_feedback = "Falsch (vielleicht Punkte)";
+          correct_feedback = "Richtig (vielleicht Punkte?)";
+        }
+        if (last_trial_correct) {
+          feedback_msg = add_lower_div(`<p class = "feedback-stim"><span style = "color: green">${correct_feedback}</span></p>`);
+        } else if (last_response == null){
+          feedback_msg = add_lower_div(`<p class = "feedback-stim"><span style = "color: red">${false_feedback}</span></p>`); 
+        } else {
+          feedback_msg = add_lower_div(`<p class = "feedback-stim"><span style = "color: red">${false_feedback}</span></p>`); 
+        }
+        return feedback_msg
+      },
+      choices: "NO_KEYS", // No keys allowed during fixation
+      trial_duration: feedback_dur, // Duration of fixation in milliseconds
+      response_ends_trial: false,
+      on_finish: function(data){
+        data.type = 'feedback';
+        data.block_num = block_num;
+        data.condition = current_condition;
+      }
+    };
+
+    var fixation_cross = {
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: function(){
+          let fix = '<p class = "normal-text">+</p>';
+          return fix
+        },
+        choices: "NO_KEYS", // No keys allowed during fixation
+        trial_duration: fixation_dur, // Duration of fixation in milliseconds
+        response_ends_trial: false,
+        on_finish: function(data){
+          data.type = 'feedback';
+          data.block_num = block_num;
+          data.condition = current_condition;
+        }
+    };
+
+    var trials = {
+        timeline: [fixation_cross, trial, feedback],
+        loop_function: function(data){
+            if (trial_num < (n_trials-1)){
+                trial_num ++;
+                return true;
+            } else {
+                trial_num = 0;
+                return false;
+            }
+        }
+    }
+
+    var practice_instruction = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: function(){
+        return `<div class = "normal-text">Jetzt beginnen die Übungsdurchgänge. Du kannst jetzt ${n_practice} mal üben.</br>Drücke eine beliebige Taste, um fortzufahren.</div>`;
+      },
+      choices: "ALL_KEYS",
+      response_ends_trial: true,
+      on_finish: function(data){
+        is_experimental = 0;
+        data.type = "instructions";
+        data.block_num = block_num;
+        data.condition = current_condition;
+      }
+    }
+
+    var block_instruction = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: function(){
+        return `<div class = "normal-text">Jetzt geht es richtig los! Antworte so schnell und akkurat wie möglich.</br>Drücke eine beliebige Taste, um fortzufahren.</div>`;
+      },
+      choices: "ALL_KEYS",
+      response_ends_trial: true,
+      on_finish: function(data){
+        data.type = "instructions";
+        data.block_num = block_num;
+        data.condition = current_condition;
+      }
+    }
+
+    // Self paced break here
+    var maybe_blockbreak = {
+        timeline: [{
+          type: jsPsychHtmlButtonResponse,
+          stimulus: `<div class = "normal-text">Ein Block ist geschafft. Du hast dir eine kurze Pause verdient. Klicke auf "Weiter", um fortzufahren.</div>`,
+          choices: ['Weiter'],
+          on_finish: function(data){
+            data.type = 'instructions';
+            data.block_num = block_num;
+            data.condition = current_condition;
+          }
+        }],
+        conditional_function: function() {
+            return (block_num +1) !== n_blocks
+        }
+    }
+
+    var practice_trials = {
+        timeline: [fixation_cross, trial, feedback],
+        loop_function: function(data){
+            if (trial_num < (n_practice-1)){
+                trial_num ++;
+                return true;
+            } else {
+                trial_num = 0;
+                is_experimental = 1;
+                return false;
+            }
+        }
+    }
+
+    var repeat_practice = {
+      type: jsPsychHtmlButtonResponse,
+      stimulus: '<div class = "normal-text">Das waren die Übungsdurchgänge. Bist du bereit, das Experiment zu beginnen? </br>Bitte sei dir sicher, dass du weißt wie du reagieren musst.</br> Drücke "Weiter" um fortzufahren und "Wiederholen" um nochmal zu üben. </div>',
+      choices: ['Wiederholen', 'Weiter'],
+      on_finish: function(data){
+        data.type = 'instructions';
+        data.block_num = block_num;
+        data.condition = current_condition;
+        if (data.response === 0){
+          repeat_practice_now = 1;
+        } else {
+          repeat_practice_now = 0;
+        }
+      }
+    }
+
+    var practice_block = {
+        timeline: [practice_instruction, practice_trials, repeat_practice],
+        loop_function: function(data){
+            if (repeat_practice_now){
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    var experiment_blocks = {
+        timeline: [practice_block, block_instruction, trials, maybe_blockbreak], // Here put button-press start or countdown to trials
+        loop_function: function(data){
+            if (block_num < (n_blocks-1)){
+              block_num ++;
+              return true;
+            } else {
+              block_num = 0;
+              return false;
+            }
+        }
+    }
+
+    var condition_instructions = {
+      type: jsPsychHtmlButtonResponse,
+      stimulus: function(){
+        return get_condition_instructions(current_condition);
+      },
+      choices: ['Weiter'],
+      on_finish: function(data){
+        data.type = 'instructions';
+        data.block_num = block_num;
+        data.condition = current_condition;
+      }
+    }
+
+    var condition_blocks = {
+      timeline: [condition_instructions, experiment_blocks],
+      loop_function: function(data){
+        if (icondition < n_conditions){
+          // Set score to 0
+          current_score = 0;
+          // Assign condition before increasing loop, because we start at 0
+          current_condition = conditions[icondition];
+          icondition ++;
+          return true
+        } else {
+          current_condition = "experiment_end"
+          return false
+        }
+      }
+    }
+    // survey trials missing
+    experiment_timeline = [welcome_screen, consent, survey_trial, instructions, condition_blocks, debriefing];
+    // experiment_timeline = [instructions, condition_blocks, debriefing];
+    jsPsych.run(experiment_timeline);
+  </script>
+</html>
