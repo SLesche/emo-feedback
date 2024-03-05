@@ -26,7 +26,8 @@ const n_blocks = 2;
 const n_practice = 10; // 30
 
 const trial_duration = 1000;
-const stim_duration = 200;
+const stim_duration = 100;
+const mask_duration = 200;
 const feedback_dur = 450;
 const rsi_duration = 500;
 const fixation_dur = 200;

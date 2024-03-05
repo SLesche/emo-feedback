@@ -1,4 +1,4 @@
-var jsPsychImageKeyboardResponse = (function (jspsych) {
+var emoFaces = (function (jspsych) {
     'use strict';
   
     const info = {
@@ -81,15 +81,7 @@ var jsPsychImageKeyboardResponse = (function (jspsych) {
             },
         },
     };
-    /**
-     * **image-keyboard-response**
-     *
-     * jsPsych plugin for displaying an image stimulus and getting a keyboard response
-     *
-     * @author Josh de Leeuw
-     * @see {@link https://www.jspsych.org/plugins/jspsych-image-keyboard-response/ image-keyboard-response plugin documentation on jspsych.org}
-     */
-    class ImageKeyboardResponsePlugin {
+    class emoFacesPlugin {
         constructor(jsPsych) {
             this.jsPsych = jsPsych;
         }
@@ -198,9 +190,42 @@ var jsPsychImageKeyboardResponse = (function (jspsych) {
                 key: null,
             };
 
+            const draw_red_lines = () => {
+                // Get canvas element
+                const canvas = document.getElementById("jspsych-emo-faces-response-stimulus");
+                
+                // Get canvas context
+                const ctx = canvas.getContext("2d");
+
+                // Define center coordinates of the canvas
+                const centerX = canvas.height / 2;
+                const centerY = canvas.width / 2;
+
+                // Draw horizontal red line
+                ctx.beginPath();
+                ctx.moveTo(0, centerY);
+                ctx.lineTo(canvasWidth, centerY);
+                ctx.strokeStyle = 'red';
+                ctx.line_width = line_width;
+                ctx.stroke();
+
+                // Draw vertical red line with jitter
+                const jitter = 50; // Adjust the amount of jitter as needed
+                const jitteredCenterY = centerY + (Math.random() * jitter * 2) - jitter;
+                ctx.beginPath();
+                ctx.moveTo(centerX, jitteredCenterY - (line_height / 2));
+                ctx.lineTo(centerX, jitteredCenterY + (line_height / 2));
+                ctx.strokeStyle = 'red';
+                ctx.line_width = line_width;
+                ctx.stroke();
+            }
+
             const display_mask = () => {
                 // Get canvas element
                 const canvas = document.getElementById("jspsych-emo-faces-response-stimulus");
+
+                // Set background
+                canvas.style.background = "darkgrey";
 
                 // Get canvas context
                 const ctx = canvas.getContext("2d");
@@ -209,22 +234,46 @@ var jsPsychImageKeyboardResponse = (function (jspsych) {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
 
                 // Generate and draw random cubic functions
+                // Generate and draw random lines
                 for (let i = 0; i < 50; i++) {
                     const startX = Math.random() * canvas.width;
                     const startY = Math.random() * canvas.height;
-                    const control1X = Math.random() * canvas.width;
-                    const control1Y = Math.random() * canvas.height;
-                    const control2X = Math.random() * canvas.width;
-                    const control2Y = Math.random() * canvas.height;
                     const endX = Math.random() * canvas.width;
                     const endY = Math.random() * canvas.height;
+                    
+                    // Determine if this line should connect to another line
+                    const connectLine = Math.random() < 0.5; // Adjust probability as needed
 
-                    ctx.beginPath();
-                    ctx.moveTo(startX, startY);
-                    ctx.bezierCurveTo(control1X, control1Y, control2X, control2Y, endX, endY);
-                    ctx.strokeStyle = 'red';
-                    ctx.lineWidth = 2;
-                    ctx.stroke();
+                    if (connectLine) {
+                        // If connecting, generate another line with shared endpoint
+                        const otherStartX = startX;
+                        const otherStartY = startY;
+                        const otherEndX = Math.random() * canvas.width;
+                        const otherEndY = Math.random() * canvas.height;
+
+                        ctx.beginPath();
+                        ctx.moveTo(startX, startY);
+                        ctx.lineTo(otherEndX, otherEndY);
+                        ctx.strokeStyle = 'red';
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
+
+                        // Draw the other line
+                        ctx.beginPath();
+                        ctx.moveTo(otherStartX, otherStartY);
+                        ctx.lineTo(endX, endY);
+                        ctx.strokeStyle = 'red';
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
+                    } else {
+                        // If not connecting, draw a single line
+                        ctx.beginPath();
+                        ctx.moveTo(startX, startY);
+                        ctx.lineTo(endX, endY);
+                        ctx.strokeStyle = 'red';
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
+                    }
                 }
             };
 
@@ -271,13 +320,22 @@ var jsPsychImageKeyboardResponse = (function (jspsych) {
                     allow_held_key: false,
                 });
             }
-            // hide stimulus if stimulus_duration is set
-            if (trial.stimulus_duration !== null) {
+            // mask stimulus if stimulus_duration is set
+            if (trial.mask_duration !== null) {
                 this.jsPsych.pluginAPI.setTimeout(() => {
                     // Here, display the mask
                     display_mask();
                 }, trial.stimulus_duration);
             }
+
+            // hide stimulus if stimulus_duration is set
+            if (trial.stimulus_duration !== null && trial.mask_duration !== null) {
+                this.jsPsych.pluginAPI.setTimeout(() => {
+                    // Here, display the mask
+                    display_element.querySelector("#jspsych-emo-faces-response-stimulus").style.visibility = "hidden";
+                }, trial.stimulus_duration + trial.mask_duration);
+            }
+
             // end trial if trial_duration is set
             if (trial.trial_duration !== null) {
                 this.jsPsych.pluginAPI.setTimeout(() => {
@@ -321,9 +379,9 @@ var jsPsychImageKeyboardResponse = (function (jspsych) {
             return data;
         }
     }
-    ImageKeyboardResponsePlugin.info = info;
+    emoFacesPlugin.info = info;
   
-    return ImageKeyboardResponsePlugin;
+    return emoFacesPlugin;
   
   })(jsPsychModule);
   

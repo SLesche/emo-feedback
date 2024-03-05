@@ -4,12 +4,13 @@
     <title><script>experiment_name</script></title>
     <meta charset="UTF-8">
     <script src="jspsych/dist/jspsych.js"></script>
+    <script src = "jspsych/dist/plugin-emo-faces-response.js"></script>
     <script src="jspsych/dist/plugin-html-keyboard-response.js"></script>
     <script src="jspsych/dist/plugin-html-button-response.js"></script>
     <script src="jspsych/dist/plugin-instructions.js"></script>
     <script src="jspsych/dist/plugin-survey.js"></script>
     <link href="jspsych/dist/jspsych.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="css/rat_styles.css">
+    <link rel="stylesheet" href="css/task.css">
     <script src="scripts/helper_function.js"></script>
     <script src="scripts/task.js"></script>
     <script src="scripts/setup.js"></script>
@@ -19,12 +20,13 @@
   <body></body>
   <script>  
     var trial = {
-      type: partnerFlanker,
+      type: emoFaces,
       stimulus: function(){
-          return stim
+          return "img/disgusted_001_f.JPG"
       },
       choices: possible_response_keys,
       stimulus_duration: stim_duration,
+      mask_duration: mask_duration,
       trial_duration: trial_duration, // Adjust as needed
       response_ends_trial: true,
       on_finish: function(data) {
@@ -44,11 +46,11 @@
           correct_feedback = "Richtig (vielleicht Punkte?)";
         }
         if (last_trial_correct) {
-          feedback_msg = add_lower_div(`<p class = "feedback-stim"><span style = "color: green">${correct_feedback}</span></p>`);
+          feedback_msg = `<p class = "feedback-stim"><span style = "color: green">${correct_feedback}</span></p>`;
         } else if (last_response == null){
-          feedback_msg = add_lower_div(`<p class = "feedback-stim"><span style = "color: red">${false_feedback}</span></p>`); 
+          feedback_msg = `<p class = "feedback-stim"><span style = "color: red">${false_feedback}</span></p>`; 
         } else {
-          feedback_msg = add_lower_div(`<p class = "feedback-stim"><span style = "color: red">${false_feedback}</span></p>`); 
+          feedback_msg = `<p class = "feedback-stim"><span style = "color: red">${false_feedback}</span></p>`; 
         }
         return feedback_msg
       },
@@ -221,8 +223,8 @@
       }
     }
     // survey trials missing
-    experiment_timeline = [welcome_screen, consent, survey_trial, instructions, condition_blocks, debriefing];
-    // experiment_timeline = [instructions, condition_blocks, debriefing];
+    //experiment_timeline = [welcome_screen, consent, survey_trial, instructions, condition_blocks, debriefing];
+    experiment_timeline = [instructions, condition_blocks, debriefing];
     jsPsych.run(experiment_timeline);
   </script>
 </html>
