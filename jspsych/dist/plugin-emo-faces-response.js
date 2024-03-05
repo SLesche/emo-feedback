@@ -108,6 +108,7 @@ var emoFaces = (function (jspsych) {
                     if (!image_drawn) {
                         getHeightWidth(); // only possible to get width/height after image loads
                         ctx.drawImage(img, 0, 0, width, height);
+                        draw_red_lines();
                     }
                 };
                 img.src = trial.stimulus;
@@ -157,6 +158,7 @@ var emoFaces = (function (jspsych) {
                 if (trial.prompt !== null) {
                     html += trial.prompt;
                 }
+
                 // update the page content
                 display_element.innerHTML = html;
                 // set image dimensions after image has loaded (so that we have access to naturalHeight/naturalWidth)
@@ -198,27 +200,26 @@ var emoFaces = (function (jspsych) {
                 const ctx = canvas.getContext("2d");
 
                 // Define center coordinates of the canvas
-                const centerX = canvas.height / 2;
-                const centerY = canvas.width / 2;
+                const centerX = canvas.width / 2;
+                const centerY = canvas.height / 2;
 
                 // Draw horizontal red line
                 ctx.beginPath();
-                ctx.moveTo(0, centerY);
-                ctx.lineTo(canvasWidth, centerY);
+                ctx.moveTo(centerX - (trial.line_width/2), centerY);
+                ctx.lineTo(centerX + (trial.line_width/2), centerY);
                 ctx.strokeStyle = 'red';
-                ctx.line_width = line_width;
+                ctx.line_width = trial.line_width;
                 ctx.stroke();
 
-                // Draw vertical red line with jitter
-                const jitter = 50; // Adjust the amount of jitter as needed
-                const jitteredCenterY = centerY + (Math.random() * jitter * 2) - jitter;
                 ctx.beginPath();
-                ctx.moveTo(centerX, jitteredCenterY - (line_height / 2));
-                ctx.lineTo(centerX, jitteredCenterY + (line_height / 2));
+                ctx.moveTo(centerX, centerY - (trial.line_height / 2));
+                ctx.lineTo(centerX, centerY + (trial.line_height / 2));
                 ctx.strokeStyle = 'red';
-                ctx.line_width = line_width;
+                ctx.line_width = trial.line_width;
                 ctx.stroke();
-            }
+            };
+
+            draw_red_lines();
 
             const display_mask = () => {
                 // Get canvas element
