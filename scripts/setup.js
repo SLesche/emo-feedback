@@ -31,7 +31,7 @@ const mask_duration = 200;
 const feedback_dur = 450;
 const rsi_duration = 500;
 const fixation_dur = 200;
-const inter_trial_intervall = 500;
+const inter_trial_interval = 500;
 
 // Remove later
 const subject_number = 1;
