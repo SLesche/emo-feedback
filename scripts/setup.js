@@ -46,13 +46,7 @@ var is_experimental = 0;
 const possible_cross_lengths = [30, 45, 60];
 const aspect_ratio = 1.25;
 
-const possible_conditions = ["condition1", "condition2"];
 const possible_response_keys = ["d", "l"];
-const random_order = jsPsych.randomization.sampleWithoutReplacement(possible_conditions, 2);
-const conditions = [random_order[0], "control", random_order[1]];
-var current_condition = "experiment_begin";
-const n_conditions = 3;
-var icondition = 0;
 
 // record the condition assignment in the jsPsych data
 // this adds a property called 'subject' and a property called 'condition' to every trial

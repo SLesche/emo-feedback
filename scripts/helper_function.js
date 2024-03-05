@@ -25,3 +25,7 @@ function visualAngleToPixels(visualAngle) {
 
     return sizeInPixelsScaled;
 }
+
+function get_correct(longer_line, response_mapping){
+    
+}

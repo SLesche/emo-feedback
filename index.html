@@ -40,6 +40,7 @@
         return is_experimental ? inter_trial_interval : 0
       },
       on_finish: function(data) {
+        //correct_response = get_correct(data.longer_line, response_mapping);
       }
     };
 
@@ -70,7 +71,6 @@
       on_finish: function(data){
         data.type = 'feedback';
         data.block_num = block_num;
-        data.condition = current_condition;
       }
     };
 
@@ -86,7 +86,6 @@
         on_finish: function(data){
           data.type = 'feedback';
           data.block_num = block_num;
-          data.condition = current_condition;
         }
     };
 
@@ -114,7 +113,6 @@
         is_experimental = 0;
         data.type = "instructions";
         data.block_num = block_num;
-        data.condition = current_condition;
       }
     }
 
@@ -128,7 +126,6 @@
       on_finish: function(data){
         data.type = "instructions";
         data.block_num = block_num;
-        data.condition = current_condition;
       }
     }
 
@@ -141,7 +138,6 @@
           on_finish: function(data){
             data.type = 'instructions';
             data.block_num = block_num;
-            data.condition = current_condition;
           }
         }],
         conditional_function: function() {
@@ -170,7 +166,6 @@
       on_finish: function(data){
         data.type = 'instructions';
         data.block_num = block_num;
-        data.condition = current_condition;
         if (data.response === 0){
           repeat_practice_now = 1;
         } else {
@@ -191,7 +186,7 @@
     }
 
     var experiment_blocks = {
-        timeline: [practice_block, block_instruction, trials, maybe_blockbreak], // Here put button-press start or countdown to trials
+        timeline: [block_instruction, trials, maybe_blockbreak], // Here put button-press start or countdown to trials
         loop_function: function(data){
             if (block_num < (n_blocks-1)){
               block_num ++;
@@ -203,38 +198,9 @@
         }
     }
 
-    var condition_instructions = {
-      type: jsPsychHtmlButtonResponse,
-      stimulus: function(){
-        return get_condition_instructions(current_condition);
-      },
-      choices: ['Weiter'],
-      on_finish: function(data){
-        data.type = 'instructions';
-        data.block_num = block_num;
-        data.condition = current_condition;
-      }
-    }
-
-    var condition_blocks = {
-      timeline: [condition_instructions, experiment_blocks],
-      loop_function: function(data){
-        if (icondition < n_conditions){
-          // Set score to 0
-          current_score = 0;
-          // Assign condition before increasing loop, because we start at 0
-          current_condition = conditions[icondition];
-          icondition ++;
-          return true
-        } else {
-          current_condition = "experiment_end"
-          return false
-        }
-      }
-    }
     // survey trials missing
-    //experiment_timeline = [welcome_screen, consent, survey_trial, instructions, condition_blocks, debriefing];
-    experiment_timeline = [instructions, condition_blocks, debriefing];
+    //experiment_timeline = [welcome_screen, consent, survey_trial, instructions, experiment_blocks, debriefing];
+    experiment_timeline = [instructions, practice_block, experiment_blocks, debriefing];
     jsPsych.run(experiment_timeline);
   </script>
 </html>

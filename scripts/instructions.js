@@ -7,11 +7,6 @@ var welcome_screen = {
     ],
     show_clickable_nav: true, 
     data: {type: 'instructions'},
-    on_finish: function(data){
-        // after instructions, the conditions start
-        current_condition = conditions[0];
-        icondition = 1;
-    },
     button_label_next: "Weiter",
     button_label_previous: "Zurück",
 }
@@ -86,11 +81,6 @@ var instructions = {
     ],
     show_clickable_nav: true, 
     data: {type: 'instructions'},
-    on_finish: function(data){
-        // after instructions, the conditions start
-        current_condition = conditions[0];
-        icondition = 1;
-    },
     button_label_next: "Weiter",
     button_label_previous: "Zurück",
 }
