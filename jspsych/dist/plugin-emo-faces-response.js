@@ -23,16 +23,22 @@ var emoFaces = (function (jspsych) {
                 default: null,
             },
             /** Maintain the aspect ratio after setting width or height */
-            line_height: {
+            line_dimensions: {
                 type: jspsych.ParameterType.INT,
-                pretty_name: "Line height",
-                default: null,
+                pretty_name: "Line dimensions",
+                default: 30,
             },
 
-            line_wight: {
+            line_aspect_ratio: {
                 type: jspsych.ParameterType.INT,
-                pretty_name: "Line width",
-                default: null,
+                pretty_name: "Aspect Ratio of lines",
+                default: 1.25,
+            },
+
+            longer_line: {
+                type: jspsych.ParameterType.BOOL,
+                pretty_name: "Longer line",
+                default: true,
             },
 
             maintain_aspect_ratio: {
@@ -203,19 +209,30 @@ var emoFaces = (function (jspsych) {
                 const centerX = canvas.width / 2;
                 const centerY = canvas.height / 2;
 
+                var line_height = 0;
+                var line_width = 0;
+
+                if (trial.longer_line){
+                    line_width = trial.line_dimensions;
+                    line_height = line_width * trial.line_aspect_ratio;
+                } else {
+                    line_height = trial.line_dimensions;
+                    line_width = line_height * trial.line_aspect_ratio;
+                }
+
                 // Draw horizontal red line
                 ctx.beginPath();
-                ctx.moveTo(centerX - (trial.line_width/2), centerY);
-                ctx.lineTo(centerX + (trial.line_width/2), centerY);
+                ctx.moveTo(centerX - (line_width/2), centerY);
+                ctx.lineTo(centerX + (line_width/2), centerY);
                 ctx.strokeStyle = 'red';
-                ctx.line_width = trial.line_width;
+                ctx.lineWidth = 2;
                 ctx.stroke();
 
                 ctx.beginPath();
-                ctx.moveTo(centerX, centerY - (trial.line_height / 2));
-                ctx.lineTo(centerX, centerY + (trial.line_height / 2));
+                ctx.moveTo(centerX, centerY - (line_height / 2));
+                ctx.lineTo(centerX, centerY + (line_height / 2));
                 ctx.strokeStyle = 'red';
-                ctx.line_width = trial.line_width;
+                ctx.lineWidth = 2;
                 ctx.stroke();
             };
 

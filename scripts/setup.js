@@ -31,6 +31,7 @@ const mask_duration = 200;
 const feedback_dur = 450;
 const rsi_duration = 500;
 const fixation_dur = 200;
+const inter_trial_intervall = 500;
 
 // Remove later
 const subject_number = 1;
@@ -41,6 +42,9 @@ var block_num = 0;
 var repeat_practice_now = 1;
 
 var is_experimental = 0;
+
+const possible_cross_lengths = [30, 45, 60];
+const aspect_ratio = 1.25;
 
 const possible_conditions = ["condition1", "condition2"];
 const possible_response_keys = ["d", "l"];
