@@ -46,6 +46,23 @@ var is_experimental = 0;
 const possible_cross_lengths = [30, 45, 60];
 const aspect_ratio = 1.25;
 
+// Set up person and emotion randomizer
+const possible_emotions = ["happy", "sad", "disgusted", "neutral"];
+
+// Function for range
+const range = (start, stop, step = 1) => Array.from({ length: (stop - start) / step + 1}, (_, i) => start + (i * step));
+const possible_subject_numbers = range(1, 16, 1);
+
+for (inumber in possible_subject_numbers){
+    if (possible_subject_numbers[inumber] < 10){
+      possible_subject_numbers[inumber] = "00" + possible_subject_numbers[inumber];
+    } else {
+      possible_subject_numbers[inumber] = "0" + possible_subject_numbers[inumber];
+    }
+}
+
+
+// Set up response mapping
 const possible_response_keys = ["d", "l"];
 const possible_stimuli = [0, 1];
 const response_mapping = {};
