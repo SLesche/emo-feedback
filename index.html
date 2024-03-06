@@ -212,12 +212,12 @@
         type: jsPsychPreload,
         images: possible_images,
         message: function() {
-          jsPsych.randomization.sampleWithReplacement(loading_messages, 1)
+          return jsPsych.randomization.sampleWithReplacement(loading_messages, 1)
         }
     }
 
     // survey trials missing
-    //experiment_timeline = [welcome_screen, consent, survey_trial, instructions, practice_block, experiment_blocks, debriefing];
+    //experiment_timeline = [preload, welcome_screen, consent, survey_trial, instructions, practice_block, experiment_blocks, debriefing];
     experiment_timeline = [preload, instructions, practice_block, experiment_blocks, debriefing];
     jsPsych.run(experiment_timeline);
   </script>
