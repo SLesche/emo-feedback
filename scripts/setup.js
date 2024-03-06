@@ -21,9 +21,9 @@ let timeline = [];
 
 // IN the real experiment, 250 responses.
 // 3*85 pro Block
-const n_trials = 5; // 85
-const n_blocks = 2;
-const n_practice = 5; // 30
+const n_trials = 30; // 85
+const n_blocks = 3;
+const n_practice = 30; //30
 
 const trial_duration = 1000;
 const stim_duration = 100;

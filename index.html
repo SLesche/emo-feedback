@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><script>experiment_name</script></title>
+    <title>Emo Faces</title>
     <meta charset="UTF-8">
     <script src="jspsych/dist/jspsych.js"></script>
     <script src = "jspsych/dist/plugin-emo-faces-response.js"></script>
@@ -208,8 +208,8 @@
     }
 
     // survey trials missing
-    //experiment_timeline = [welcome_screen, consent, survey_trial, instructions, experiment_blocks, debriefing];
-    experiment_timeline = [instructions, practice_block, experiment_blocks, debriefing];
+    experiment_timeline = [welcome_screen, consent, survey_trial, instructions, practice_block, experiment_blocks, debriefing];
+    //experiment_timeline = [instructions, practice_block, experiment_blocks, debriefing];
     jsPsych.run(experiment_timeline);
   </script>
 </html>
