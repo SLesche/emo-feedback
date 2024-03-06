@@ -61,6 +61,27 @@ if (response1 == possible_response_keys[0]){
     response_mapping[possible_stimuli[0]] = response1;
 }
 
+let task_instruction_message = "";
+
+let letter_count = 1;
+
+for (const stimulus in response_mapping) {
+    const responseChar = response_mapping[stimulus];
+    let line_instruction = "";
+    if (stimulus == false){
+        line_instruction = "Horizontal line is longer";
+    } else {
+        line_instruction = "Vertical line is longer";
+    }
+
+    task_instruction_message += `${line_instruction} -> Taste ${responseChar.toUpperCase()}`;
+
+     // Add a newline after every 2 combinations
+     if (++letter_count % 2 === 0) {
+        task_instruction_message += "</br>";
+    }
+}  
+
 // record the condition assignment in the jsPsych data
 // this adds a property called 'subject' and a property called 'condition' to every trial
 jsPsych.data.addProperties({

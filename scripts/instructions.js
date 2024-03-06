@@ -75,9 +75,9 @@ const survey_trial = {
 var instructions = {
     type: jsPsychInstructions,
     pages: [
-     '<div class = "normal-text">Task Instructions!</div>',
+     '<div class = "normal-text">Instructions</div>',
      `<div class = "normal-text">More task instructions!</div>`,
-
+     `<div class = "normal-text">${task_instruction_message}</div>`
     ],
     show_clickable_nav: true, 
     data: {type: 'instructions'},
