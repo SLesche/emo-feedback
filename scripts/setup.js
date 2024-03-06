@@ -30,7 +30,7 @@ const stim_duration = 100;
 const mask_duration = 200;
 const feedback_dur = 450;
 const rsi_duration = 500;
-const fixation_dur = 200;
+const fixation_dur = 500;
 const inter_trial_interval = 500;
 
 // Remove later
