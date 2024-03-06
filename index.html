@@ -40,7 +40,13 @@
         return is_experimental ? inter_trial_interval : 0
       },
       on_finish: function(data) {
-        //correct_response = get_correct(data.longer_line, response_mapping);
+        correct_response = get_correct(this.longer_line, response_mapping);
+        data.accuracy = data.response === correct_response ? 1 : 0;
+        data.type = 'trial';
+        data.longer_line = this.longer_line;
+        data.is_experimental = is_experimental;
+        data.block_num = block_num;
+        data.trial_num = trial_num;
       }
     };
 

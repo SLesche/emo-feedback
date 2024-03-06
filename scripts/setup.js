@@ -47,6 +47,19 @@ const possible_cross_lengths = [30, 45, 60];
 const aspect_ratio = 1.25;
 
 const possible_response_keys = ["d", "l"];
+const possible_stimuli = [0, 1];
+const response_mapping = {};
+// Determine responses based on even or odd subject_number
+const response1 = subject_number % 2 === 0 ? possible_response_keys[0] : possible_response_keys[1];
+const response2 = subject_number % 2 === 0 ? possible_response_keys[1] : possible_response_keys[0];
+
+if (response1 == possible_response_keys[0]){
+    response_mapping[possible_stimuli[0]] = response1;
+    response_mapping[possible_stimuli[1]] = response2;
+} else {
+    response_mapping[possible_stimuli[1]] = response2;
+    response_mapping[possible_stimuli[0]] = response1;
+}
 
 // record the condition assignment in the jsPsych data
 // this adds a property called 'subject' and a property called 'condition' to every trial

@@ -27,5 +27,5 @@ function visualAngleToPixels(visualAngle) {
 }
 
 function get_correct(longer_line, response_mapping){
-    
+    return response_mapping[longer_line]
 }
