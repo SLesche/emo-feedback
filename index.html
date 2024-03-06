@@ -9,6 +9,7 @@
     <script src="jspsych/dist/plugin-html-button-response.js"></script>
     <script src="jspsych/dist/plugin-instructions.js"></script>
     <script src="jspsych/dist/plugin-survey.js"></script>
+    <script src="jspsych/dist/plugin-preload.js"></script>
     <link href="jspsych/dist/jspsych.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="css/task.css">
     <script src="scripts/helper_function.js"></script>
@@ -207,9 +208,14 @@
         }
     }
 
+    var preload = {
+        type: jsPsychPreload,
+        auto_preload: true
+    }
+
     // survey trials missing
-    experiment_timeline = [welcome_screen, consent, survey_trial, instructions, practice_block, experiment_blocks, debriefing];
-    //experiment_timeline = [instructions, practice_block, experiment_blocks, debriefing];
+    //experiment_timeline = [welcome_screen, consent, survey_trial, instructions, practice_block, experiment_blocks, debriefing];
+    experiment_timeline = [preload, instructions, practice_block, experiment_blocks, debriefing];
     jsPsych.run(experiment_timeline);
   </script>
 </html>
