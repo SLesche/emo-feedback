@@ -71,7 +71,7 @@ for (inumber in possible_subject_numbers){
     emo_images[possible_subject_numbers[inumber]] = imgs;
 }
 
-const possible_images = Object.values(emo_images);
+const possible_images = [].concat.apply([], Object.values(emo_images));
 
 var block_stimlist = [];
 
