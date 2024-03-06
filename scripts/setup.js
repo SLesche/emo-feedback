@@ -21,9 +21,9 @@ let timeline = [];
 
 // IN the real experiment, 250 responses.
 // 3*85 pro Block
-const n_trials = 30; // 85
+const n_trials = 5; // 85
 const n_blocks = 2;
-const n_practice = 10; // 30
+const n_practice = 5; // 30
 
 const trial_duration = 1000;
 const stim_duration = 100;
@@ -61,6 +61,19 @@ for (inumber in possible_subject_numbers){
     }
 }
 
+emo_images = {};
+
+for (inumber in possible_subject_numbers){
+    let imgs = [];
+    for (iemotion in possible_emotions){
+        imgs[iemotion] = "img/" + possible_emotions[iemotion] + "_" + possible_subject_numbers[inumber] + ".JPG"
+    }
+    emo_images[possible_subject_numbers[inumber]] = imgs;
+}
+
+var block_stimlist = [];
+
+block_stimlist = [jsPsych.randomization.shuffle(possible_subject_numbers).concat(jsPsych.randomization.shuffle(possible_subject_numbers))];
 
 // Set up response mapping
 const possible_response_keys = ["d", "l"];

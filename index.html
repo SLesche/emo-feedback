@@ -22,7 +22,8 @@
     var trial = {
       type: emoFaces,
       stimulus: function(){
-          return "img/disgusted_001_f.JPG"
+        let img_src = jsPsych.randomization.sampleWithReplacement(emo_images[block_stimlist[0][block_num]], 1)
+        return img_src
       },
       choices: possible_response_keys,
       stimulus_duration: stim_duration,
@@ -42,6 +43,7 @@
       on_finish: function(data) {
         correct_response = get_correct(this.longer_line, response_mapping);
         data.accuracy = data.response === correct_response ? 1 : 0;
+        data.image_subject_number = block_stimlist[0][block_num];
         data.type = 'trial';
         data.longer_line = this.longer_line;
         data.is_experimental = is_experimental;
