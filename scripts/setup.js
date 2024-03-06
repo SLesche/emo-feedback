@@ -71,6 +71,8 @@ for (inumber in possible_subject_numbers){
     emo_images[possible_subject_numbers[inumber]] = imgs;
 }
 
+const possible_images = Object.values(emo_images);
+
 var block_stimlist = [];
 
 block_stimlist = [jsPsych.randomization.shuffle(possible_subject_numbers).concat(jsPsych.randomization.shuffle(possible_subject_numbers))];
