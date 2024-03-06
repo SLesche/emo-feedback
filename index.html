@@ -211,6 +211,7 @@
     var preload = {
         type: jsPsychPreload,
         images: possible_images,
+        message: jsPsych.randomization.sampleWithReplacement(loading_messages, 1)
     }
 
     // survey trials missing
