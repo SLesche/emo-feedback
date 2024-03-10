@@ -11,6 +11,7 @@
     <script src="jspsych/dist/plugin-instructions.js"></script>
     <script src="jspsych/dist/plugin-survey.js"></script>
     <script src="jspsych/dist/plugin-preload.js"></script>
+    <script src="jspsych/dist/plugin-html-slider-response.js"></script>
     <link href="jspsych/dist/jspsych.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="css/task.css">
     <script src="scripts/helper_function.js"></script>
@@ -140,11 +141,32 @@
       }
     }
 
+    var n_correct_question = {
+      type: jsPsychHtmlSliderResponse,
+      stimulus: `Bei wie vielen der vergangenen ${n_trials} Durchgänge hast du deiner Meinung nach richtig geantwortet?`,
+      min: 0,
+      max: n_trials,
+      step: 1,
+      slider_start: 0,
+      button_label: "Weiter",
+      labels: range(0, n_trials)
+    }
+
     // Self paced break here
     var maybe_blockbreak = {
         timeline: [{
           type: jsPsychHtmlButtonResponse,
-          stimulus: `<div class = "normal-text">Ein Block ist geschafft. Bei wie vielen der vergangenen 18 Durchgänge hast du deiner Meinung nach richtig geantwortet?</div>`,
+          stimulus: function(){
+            var base_message = "<b>Kurze Pause!</b></br></br>"
+            var percent_done = ((block_num+1) / n_blocks) * 100;
+            if (percent_done === 25 || percent_done === 50 || percent_done === 75){
+              var percent_message = `Du hast ${percent_done}% der Blöcke geschafft!</br>`;
+              base_message += percent_message;
+            }
+          base_message += "Du hast nun die Möglichkeit, eine kurze Pause zu machen.</br>Drücke wieder die Leerzeichen-Taste, wenn du bereit bist, weiterzumachen.</br>Zur Erinnerung: Entscheidest du dich dafür, dass die horizontale Linie länger ist, drücke die Taste „H“. Entschiedest du dich dafür, dass die vertikale Linie länger ist, drücke die Taste „V“.</br>Versuche bitte weiterhin, so schnell und akkurat wie möglich zu antworten." 
+          
+          return `<div class = "normal-text">${base_message}</div>`
+          },
           choices: ['Weiter'],
           on_finish: function(data){
             data.type = 'instructions';
@@ -197,7 +219,7 @@
     }
 
     var experiment_blocks = {
-        timeline: [block_instruction, trials, maybe_blockbreak], // Here put button-press start or countdown to trials
+        timeline: [block_instruction, trials, n_correct_question, maybe_blockbreak], // Here put button-press start or countdown to trials
         loop_function: function(data){
             if (block_num < (n_blocks-1)){
               block_num ++;
@@ -225,7 +247,6 @@
       ],
       button_label: 'Fertig'
     }
-
 
     // survey trials missing
     //experiment_timeline = [preload, welcome_screen, consent, survey_trial, instructions, practice_block, experiment_blocks, hypo_question, debriefing];

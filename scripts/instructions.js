@@ -76,8 +76,7 @@ var instructions = {
     type: jsPsychInstructions,
     pages: [
      `<div class = "normal-text">Im Folgenden wirst du mehrere Blöcke einer <i>Line Judgement Task</i> bearbeiten.</br>Dabei siehst du für ${stim_duration}ms ein rotes Kreuz in der Mitte des Bildschirms, bestehend aus einer vertikalen und einer horizontalen Linie.</br>Im Anschluss wird für weitere ${mask_duration}ms eine Maske zu sehen sein.</div>`,
-     `<div class = "normal-text">Deine Aufgabe ist es, im Anschluss zu entscheiden, welche der beiden Linie länger war und die entsprechende Taste zu drücken:</br>Entscheidest du dich dafür, dass die horizontale Linie länger ist, drücke die Taste „H“. Entschiedest du dich dafür, dass die vertikale Linie länger ist, drücke die Taste „V“.</div>`,
-     `<div class = "normal-text">Versuche bitte, so schnell und akkurat wie möglich zu antworten. </br>Drücke die Leerzeichen-Taste, um fortzufahren.</div>`
+     `<div class = "normal-text">Deine Aufgabe ist es, im Anschluss zu entscheiden, welche der beiden Linie länger war und die entsprechende Taste zu drücken:</br>Entscheidest du dich dafür, dass die horizontale Linie länger ist, drücke die Taste „H“. Entschiedest du dich dafür, dass die vertikale Linie länger ist, drücke die Taste „V“.</br></br>Versuch bitte, so <b>schnell und akkurat</b> wie möglich zu antworten.</div>`,
     ],
     show_clickable_nav: true, 
     data: {type: 'instructions'},
