@@ -7,6 +7,7 @@
     <script src = "jspsych/dist/plugin-emo-faces-response.js"></script>
     <script src="jspsych/dist/plugin-html-keyboard-response.js"></script>
     <script src="jspsych/dist/plugin-html-button-response.js"></script>
+    <script src="jspsych/dist/plugin-survey-text.js"></script>
     <script src="jspsych/dist/plugin-instructions.js"></script>
     <script src="jspsych/dist/plugin-survey.js"></script>
     <script src="jspsych/dist/plugin-preload.js"></script>
@@ -216,9 +217,19 @@
         }
     }
 
+    var hypo_question = {
+      type: jsPsychSurveyText,
+      preamble: 'Du hast es geschafft! Zum Abschluss noch eine letzte Frage:',
+      questions: [
+        {prompt: 'Was glaubst du, worum es in der Studie ging?'}
+      ],
+      button_label: 'Fertig'
+    }
+
+
     // survey trials missing
-    experiment_timeline = [preload, welcome_screen, consent, survey_trial, instructions, practice_block, experiment_blocks, debriefing];
-    //experiment_timeline = [preload, instructions, practice_block, experiment_blocks, debriefing];
+    //experiment_timeline = [preload, welcome_screen, consent, survey_trial, instructions, practice_block, experiment_blocks, hypo_question, debriefing];
+    experiment_timeline = [preload, instructions, practice_block, experiment_blocks, hypo_question, debriefing];
     jsPsych.run(experiment_timeline);
   </script>
 </html>
