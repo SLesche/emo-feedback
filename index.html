@@ -133,7 +133,7 @@
       stimulus: function(){
         return `<div class = "normal-text">Deine Aufgabe wird es nun wieder sein, zu entscheiden, welche der beiden Linien länger ist.</br>Hinter dem roten Kreuz wird dieses Mal immer ein Gesicht zu sehen sein. Dieses gibt allerdings keinen Aufschluss über die Länge der Linien und ist somit irrelevant für die Bearbeitung der Aufgabe.</br>Konzentriere dich einfach weiterhin auf die <i>Line Judgement Task</i>.</br>Du bekommst außerdem kein Feedback mehr über die Richtigkeit deiner Antwort. Versuche bitte wieder, so schnell und akkurat wie möglich zu antworten. </br></br>Nochmal zur Erinnerung: Entscheidest du dich dafür, dass die horizontale Linie länger ist, drücke die Taste „H“. Entschiedest du dich dafür, dass die vertikale Linie länger ist, drücke die Taste „V“.</br>Drücke nun die Leerzeichen-Taste, um die Aufgabe zu starten.</div>`;
       },
-      choices: "ALL_KEYS",
+      choices: " ",
       response_ends_trial: true,
       on_finish: function(data){
         data.type = "instructions";
@@ -160,10 +160,10 @@
             var base_message = "<b>Kurze Pause!</b></br></br>"
             var percent_done = ((block_num+1) / n_blocks) * 100;
             if (percent_done === 25 || percent_done === 50 || percent_done === 75){
-              var percent_message = `Du hast ${percent_done}% der Blöcke geschafft!</br>`;
-              base_message += percent_message;
+              var percent_message = `<b>Du hast ${percent_done}% der Blöcke geschafft!</b></br></br>`;
+              base_message = percent_message;
             }
-          base_message += "Du hast nun die Möglichkeit, eine kurze Pause zu machen.</br>Drücke wieder die Leerzeichen-Taste, wenn du bereit bist, weiterzumachen.</br>Zur Erinnerung: Entscheidest du dich dafür, dass die horizontale Linie länger ist, drücke die Taste „H“. Entschiedest du dich dafür, dass die vertikale Linie länger ist, drücke die Taste „V“.</br>Versuche bitte weiterhin, so schnell und akkurat wie möglich zu antworten." 
+          base_message += "Du hast nun die Möglichkeit, eine kurze Pause zu machen.</br>Zur Erinnerung: Entscheidest du dich dafür, dass die horizontale Linie länger ist, drücke die Taste „H“. Entscheidest du dich dafür, dass die vertikale Linie länger ist, drücke die Taste „V“.</br>Versuche bitte weiterhin, so schnell und akkurat wie möglich zu antworten." 
           
           return `<div class = "normal-text">${base_message}</div>`
           },
@@ -219,7 +219,7 @@
     }
 
     var experiment_blocks = {
-        timeline: [block_instruction, trials, n_correct_question, maybe_blockbreak], // Here put button-press start or countdown to trials
+        timeline: [trials, n_correct_question, maybe_blockbreak], // Here put button-press start or countdown to trials
         loop_function: function(data){
             if (block_num < (n_blocks-1)){
               block_num ++;
@@ -249,8 +249,8 @@
     }
 
     // survey trials missing
-    //experiment_timeline = [preload, welcome_screen, consent, survey_trial, instructions, practice_block, experiment_blocks, hypo_question, debriefing];
-    experiment_timeline = [preload, instructions, practice_block, experiment_blocks, hypo_question, debriefing];
+    //experiment_timeline = [preload, welcome_screen, consent, survey_trial, instructions, practice_block, block_instruction, experiment_blocks, hypo_question, debriefing];
+    experiment_timeline = [preload, instructions, practice_block, block_instruction, experiment_blocks, hypo_question, debriefing];
     jsPsych.run(experiment_timeline);
   </script>
 </html>
