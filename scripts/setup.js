@@ -85,6 +85,7 @@ const response_mapping = {};
 response_mapping[possible_stimuli[0]] = possible_response_keys[0];
 response_mapping[possible_stimuli[1]] = possible_response_keys[1];
 
+/*
 let task_instruction_message = "";
 
 let letter_count = 1;
@@ -105,9 +106,10 @@ for (const stimulus in response_mapping) {
         task_instruction_message += "</br>";
     }
 }  
-
+*/
 // record the condition assignment in the jsPsych data
-// this adds a property called 'subject' and a property called 'condition' to every trial
+// this adds a property called 'subject' to every trial
+
 jsPsych.data.addProperties({
   subject: subject_number,
 });
