@@ -21,9 +21,9 @@ let timeline = [];
 
 // IN the real experiment, 250 responses.
 // 3*85 pro Block
-const n_trials = 30; // 85
-const n_blocks = 3;
-const n_practice = 30; //30
+const n_trials = 18; // 85
+const n_blocks = 32;
+const n_practice = 18; //30
 
 const trial_duration = 1000;
 const stim_duration = 100;
@@ -78,20 +78,12 @@ var block_stimlist = [];
 block_stimlist = [jsPsych.randomization.shuffle(possible_subject_numbers).concat(jsPsych.randomization.shuffle(possible_subject_numbers))];
 
 // Set up response mapping
-const possible_response_keys = ["d", "l"];
+const possible_response_keys = ["h", "v"];
 const possible_stimuli = [0, 1];
 const response_mapping = {};
-// Determine responses based on even or odd subject_number
-const response1 = subject_number % 2 === 0 ? possible_response_keys[0] : possible_response_keys[1];
-const response2 = subject_number % 2 === 0 ? possible_response_keys[1] : possible_response_keys[0];
 
-if (response1 == possible_response_keys[0]){
-    response_mapping[possible_stimuli[0]] = response1;
-    response_mapping[possible_stimuli[1]] = response2;
-} else {
-    response_mapping[possible_stimuli[1]] = response2;
-    response_mapping[possible_stimuli[0]] = response1;
-}
+response_mapping[possible_stimuli[0]] = possible_response_keys[0];
+response_mapping[possible_stimuli[1]] = possible_response_keys[1];
 
 let task_instruction_message = "";
 
