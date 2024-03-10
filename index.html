@@ -62,11 +62,11 @@
         const last_trial_correct = jsPsych.data.get().last(1).values()[0].accuracy;
         const last_response = jsPsych.data.get().last(1).values()[0].response;
         let feedback_msg = "";
-        let correct_feedback = "Richtig";
+        let correct_feedback = "Korrekt";
         let false_feedback = "Falsch";
         if (is_experimental){
-          false_feedback = "Falsch (vielleicht Punkte)";
-          correct_feedback = "Richtig (vielleicht Punkte?)";
+          false_feedback = "Falsch";
+          correct_feedback = "Korrekt";
         }
         if (last_trial_correct) {
           feedback_msg = `<p class = "feedback-stim"><span style = "color: green">${correct_feedback}</span></p>`;
