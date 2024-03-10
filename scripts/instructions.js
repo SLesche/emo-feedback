@@ -1,7 +1,7 @@
 var welcome_screen = {
     type: jsPsychInstructions,
     pages: [
-     '<div class = "normal-text">Herzlich Willkommen und vielen Dank für Ihr Interesse an dieser Studie!</br>Im Folgenden werden Sie vor Studienbeginn über die Inhalte und Datenschutzhinweise informiert</div>',
+     '<div class = "normal-text">Willkommen bei der Studie „Face to Face“!</br>Im Folgenden werden Sie vor Studienbeginn über die Inhalte und Datenschutzhinweise informiert</div>',
      '<div class = "normal-text">Im Rahmen des PROJEKTES möchten wir UNTERSUCHUNGSGRUND.</br>Die Bearbeitung wird ca. BEARBEITUNGSDAUER in Anspruch nehmen. Sofern Sie an der Universität Heidelberg studieren, können Sie für die Teilnahme VERGÜTUNG bescheinigt bekommen.</div>',
      '<div class = "normal-text"><i>Bitte lesen Sie sich die folgenden Informationen sorgfältig durch.</i></br>Die Teilnahme an dieser Studie erfolgt freiwillig und ist mit keinen Risiken verbunden. Es steht Ihnen jederzeit frei, Ihre Teilnahme zu widerrufen oder abzubrechen, ohne dass hierdurch ein Nachteil für Sie entsteht. Die Studie dient rein wissenschaftlichen Zwecken und hat keinerlei kommerziellen Hintergrund. Ihre Daten werden anonym erfasst und gespeichert, sodass kein Rückschluss auf Ihre Person möglich ist.</br>Wenn Sie Fragen zu dieser Erhebung haben, wenden Sie sich gerne an die Versuchsleiterin vor Ort.</div>',
     ],
@@ -75,9 +75,9 @@ const survey_trial = {
 var instructions = {
     type: jsPsychInstructions,
     pages: [
-     '<div class = "normal-text">Instructions</div>',
-     `<div class = "normal-text">More task instructions!</div>`,
-     `<div class = "normal-text">${task_instruction_message}</div>`
+     `<div class = "normal-text">Im Folgenden wirst du mehrere Blöcke einer <i>Line Judgement Task</i> bearbeiten.</br>Dabei siehst du für ${stim_duration}ms ein rotes Kreuz in der Mitte des Bildschirms, bestehend aus einer vertikalen und einer horizontalen Linie.</br>Im Anschluss wird für weitere ${mask_duration}ms eine Maske zu sehen sein.</div>`,
+     `<div class = "normal-text">Deine Aufgabe ist es, im Anschluss zu entscheiden, welche der beiden Linie länger war und die entsprechende Taste zu drücken:</br>Entscheidest du dich dafür, dass die horizontale Linie länger ist, drücke die Taste „H“. Entschiedest du dich dafür, dass die vertikale Linie länger ist, drücke die Taste „V“.</div>`,
+     `<div class = "normal-text">Versuche bitte, so schnell und akkurat wie möglich zu antworten. </br>Drücke die Leerzeichen-Taste, um fortzufahren.</div>`
     ],
     show_clickable_nav: true, 
     data: {type: 'instructions'},

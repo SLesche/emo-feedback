@@ -115,9 +115,9 @@
     var practice_instruction = {
       type: jsPsychHtmlKeyboardResponse,
       stimulus: function(){
-        return `<div class = "normal-text">Jetzt beginnen die Übungsdurchgänge. Du kannst jetzt ${n_practice} mal üben.</br>Drücke eine beliebige Taste, um fortzufahren.</div>`;
+        return `<div class = "normal-text">Vorab bearbeitest du nun einen Übungsblock, um den Ablauf der Aufgabe zu verinnerlichen.</br>Dabei bekommst du nach jeder Antwort ein visuelles Feedback darüber, ob deine Antwort korrekt oder falsch war.</br>Wenn du bereit bist, drücke die Leerzeichen-Taste, um den Übungsblock zu starten.</div>`;
       },
-      choices: "ALL_KEYS",
+      choices: " ",
       response_ends_trial: true,
       on_finish: function(data){
         is_experimental = 0;
@@ -129,7 +129,7 @@
     var block_instruction = {
       type: jsPsychHtmlKeyboardResponse,
       stimulus: function(){
-        return `<div class = "normal-text">Jetzt geht es richtig los! Antworte so schnell und akkurat wie möglich.</br>Drücke eine beliebige Taste, um fortzufahren.</div>`;
+        return `<div class = "normal-text">Deine Aufgabe wird es nun wieder sein, zu entscheiden, welche der beiden Linien länger ist.</br>Hinter dem roten Kreuz wird dieses Mal immer ein Gesicht zu sehen sein. Dieses gibt allerdings keinen Aufschluss über die Länge der Linien und ist somit irrelevant für die Bearbeitung der Aufgabe.</br>Konzentriere dich einfach weiterhin auf die <i>Line Judgement Task</i>.</br>Du bekommst außerdem kein Feedback mehr über die Richtigkeit deiner Antwort. Versuche bitte wieder, so schnell und akkurat wie möglich zu antworten. </br></br>Nochmal zur Erinnerung: Entscheidest du dich dafür, dass die horizontale Linie länger ist, drücke die Taste „H“. Entschiedest du dich dafür, dass die vertikale Linie länger ist, drücke die Taste „V“.</br>Drücke nun die Leerzeichen-Taste, um die Aufgabe zu starten.</div>`;
       },
       choices: "ALL_KEYS",
       response_ends_trial: true,
@@ -143,7 +143,7 @@
     var maybe_blockbreak = {
         timeline: [{
           type: jsPsychHtmlButtonResponse,
-          stimulus: `<div class = "normal-text">Ein Block ist geschafft. Du hast dir eine kurze Pause verdient. Klicke auf "Weiter", um fortzufahren.</div>`,
+          stimulus: `<div class = "normal-text">Ein Block ist geschafft. Bei wie vielen der vergangenen 18 Durchgänge hast du deiner Meinung nach richtig geantwortet?</div>`,
           choices: ['Weiter'],
           on_finish: function(data){
             data.type = 'instructions';
@@ -171,7 +171,7 @@
 
     var repeat_practice = {
       type: jsPsychHtmlButtonResponse,
-      stimulus: '<div class = "normal-text">Das waren die Übungsdurchgänge. Bist du bereit, das Experiment zu beginnen? </br>Bitte sei dir sicher, dass du weißt wie du reagieren musst.</br> Drücke "Weiter" um fortzufahren und "Wiederholen" um nochmal zu üben. </div>',
+      stimulus: '<div class = "normal-text">Du hast den Übungsblock geschafft! Nun startet gleich die richtige Aufgabe.</br>Bitte sei dir sicher, dass du weißt wie du reagieren musst.</br> Drücke "Weiter" um fortzufahren und "Wiederholen" um nochmal zu üben. </div>',
       choices: ['Wiederholen', 'Weiter'],
       on_finish: function(data){
         data.type = 'instructions';
@@ -217,8 +217,8 @@
     }
 
     // survey trials missing
-    //experiment_timeline = [preload, welcome_screen, consent, survey_trial, instructions, practice_block, experiment_blocks, debriefing];
-    experiment_timeline = [preload, instructions, practice_block, experiment_blocks, debriefing];
+    experiment_timeline = [preload, welcome_screen, consent, survey_trial, instructions, practice_block, experiment_blocks, debriefing];
+    //experiment_timeline = [preload, instructions, practice_block, experiment_blocks, debriefing];
     jsPsych.run(experiment_timeline);
   </script>
 </html>
