@@ -19,8 +19,6 @@ let init_date = new Date();
 let init_time = init_date.getFullYear() + "_" + (init_date.getMonth() + 1) + "_" + init_date.getDate() + "_" + init_date.getHours() + "_" + init_date.getMinutes() + "_" + init_date.getSeconds()
 let timeline = [];
 
-// IN the real experiment, 250 responses.
-// 3*85 pro Block
 const n_trials = 18; // 85
 const n_blocks = 32;
 const n_practice = 18; //30
