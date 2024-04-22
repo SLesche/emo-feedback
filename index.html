@@ -52,6 +52,7 @@
         data.is_experimental = is_experimental;
         data.block_num = block_num;
         data.trial_num = trial_num;
+        data.line_dims = this.line_dimensions;
         //console.log([this.longer_line, correct_response, data.response])
       }
     };
@@ -160,7 +161,7 @@
             var base_message = "<b>Kurze Pause!</b></br></br>"
             var percent_done = ((block_num+1) / n_blocks) * 100;
             if (percent_done === 25 || percent_done === 50 || percent_done === 75){
-              var percent_message = `<b>Du hast ${percent_done}% der Blöcke geschafft!</b></br></br>`;
+              var percent_message = `<span style = "color: red"><b>Du hast ${percent_done}% der Blöcke geschafft!</b></span></br></br>`;
               base_message = percent_message;
             }
           base_message += "Du hast nun die Möglichkeit, eine kurze Pause zu machen.</br>Zur Erinnerung: Entscheidest du dich dafür, dass die horizontale Linie länger ist, drücke die Taste „H“. Entscheidest du dich dafür, dass die vertikale Linie länger ist, drücke die Taste „V“.</br>Versuche bitte weiterhin, so schnell und akkurat wie möglich zu antworten." 
@@ -220,7 +221,7 @@
 
     var experiment_countdown = {
       type: jsPsychHtmlKeyboardResponse,
-      stimulus: `<div class = "normal-text"><p>Die Aufgabe beginnt in 3 Sekunden. Mache dich bereit mit "H" oder "V" zu antworten</p></div>`,
+      stimulus: `<div class = "normal-text"><p>Die Aufgabe beginnt in 3 Sekunden. Bewege die Maus weg aus der Mitte des Bildschirms und mache dich bereit mit "H" oder "V" zu antworten</p></div>`,
       choices: "NO_KEYS",
       trial_duration: 3000
     }
