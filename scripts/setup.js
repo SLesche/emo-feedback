@@ -24,7 +24,7 @@ const n_blocks = 32;
 const n_practice = 18; //30
 
 const trial_duration = 1000;
-const stim_duration = 100;
+const stim_duration = 200;
 const mask_duration = 200;
 const feedback_dur = 450;
 const rsi_duration = 500;
@@ -41,7 +41,7 @@ var repeat_practice_now = 1;
 
 var is_experimental = 0;
 
-const possible_cross_lengths = [30, 45, 60];
+const possible_cross_lengths = [45, 60, 75];
 const aspect_ratio = 1.25;
 
 // Set up person and emotion randomizer
