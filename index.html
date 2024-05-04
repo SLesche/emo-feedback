@@ -132,7 +132,7 @@
     var block_instruction = {
       type: jsPsychHtmlKeyboardResponse,
       stimulus: function(){
-        return `<div class = "normal-text">Deine Aufgabe wird es nun wieder sein, zu entscheiden, welche der beiden Linien länger ist.</br>Es gilt weiterhin, dass die Gesichter im Hintergrund <b>keinen</b> Aufschluss über die Länge der Linien und somit <b>irrelevant</b> für die Bearbeitung der Aufgabe sind.</br>Konzentriere dich einfach weiterhin auf die <i>Line Judgement Task</i>.</br>Du bekommst außerdem kein Feedback mehr über die Richtigkeit deiner Antwort. Versuche bitte wieder, so schnell und akkurat wie möglich zu antworten. </br></br>Nochmal zur Erinnerung: Entscheidest du dich dafür, dass die horizontale Linie länger ist, drücke die Taste „H“. Entschiedest du dich dafür, dass die vertikale Linie länger ist, drücke die Taste „V“.</br>Drücke nun die Leerzeichen-Taste, um die Aufgabe zu starten.</div>`;
+        return `<div class = "normal-text">Deine Aufgabe wird es nun wieder sein, zu entscheiden, welche der beiden Linien länger ist.</br>Es gilt weiterhin, dass die Gesichter im Hintergrund <b>keinen</b> Aufschluss über die Länge der Linien und somit <b>irrelevant</b> für die Bearbeitung der Aufgabe sind.</br>Konzentriere dich einfach weiterhin auf die <i>Line Judgement Task</i>.</br>Du bekommst außerdem kein Feedback mehr über die Richtigkeit deiner Antwort. Versuche bitte wieder, so schnell und akkurat wie möglich zu antworten. </br></br>Nochmal zur Erinnerung: Entscheidest du dich dafür, dass die horizontale Linie länger ist, drücke die Taste „H“. Entscheidest du dich dafür, dass die vertikale Linie länger ist, drücke die Taste „V“.</br>Drücke nun die Leerzeichen-Taste, um die Aufgabe zu starten.</div>`;
       },
       choices: " ",
       response_ends_trial: true,
@@ -218,13 +218,11 @@
             }
         }
     }
-
     var experiment_countdown = {
       type: jsPsychHtmlKeyboardResponse,
-      stimulus: `<div class = "normal-text"><p>Die Aufgabe beginnt in 3 Sekunden. Bewege die Maus weg aus der Mitte des Bildschirms und mache dich bereit mit "H" oder "V" zu antworten</p></div>`,
-      choices: "NO_KEYS",
-      trial_duration: 3000
-    }
+      stimulus: `<div class = "normal-text"><p>Bewege die Maus weg aus der Mitte des Bildschirms und mache dich bereit mit "H" oder "V" zu antworten</p></br><p>Drücke einmal "H" oder "V" um zu starten.</p></div>`,
+      choices: ['h', 'v'],
+    };
 
     var experiment_blocks = {
         timeline: [experiment_countdown, trials, n_correct_question, maybe_blockbreak], // Here put button-press start or countdown to trials
@@ -251,14 +249,15 @@
       type: jsPsychSurveyText,
       preamble: 'Du hast es geschafft! Zum Abschluss noch eine letzte Frage:',
       questions: [
-        {prompt: 'Was glaubst du, worum es in der Studie ging?'}
+        {prompt: 'Was glaubst du, worum es in der Studie ging?',
+        rows: 10}
       ],
       button_label: 'Fertig'
     }
 
     // survey trials missing
     experiment_timeline = [preload, welcome_screen, consent, survey_trial, instructions, practice_block, block_instruction, experiment_blocks, hypo_question, debriefing];
-    //experiment_timeline = [preload, instructions, practice_block, block_instruction, experiment_blocks, hypo_question, debriefing];
+    //experiment_timeline = [experiment_blocks, hypo_question, debriefing];
     jsPsych.run(experiment_timeline);
   </script>
 </html>
