@@ -23,7 +23,7 @@ const n_trials = 18; // 85
 const n_blocks = 32;
 const n_practice = 18; //30
 
-const trial_duration = 1000;
+const trial_duration = 10000;
 const stim_duration = 200;
 const mask_duration = 200;
 const feedback_dur = 450;
