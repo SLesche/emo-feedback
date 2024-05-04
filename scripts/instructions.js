@@ -2,7 +2,7 @@ var welcome_screen = {
     type: jsPsychInstructions,
     pages: [
      '<div class = "normal-text">Willkommen bei der Studie „Face to Face“!</br>Im Folgenden werden Sie vor Studienbeginn über die Inhalte und Datenschutzhinweise informiert</div>',
-     '<div class = "normal-text">Im Rahmen des Empras möchten wir Reaktionszeiten bei emotionalen Gesichtern genauer untersuchen.</br>Die Bearbeitung wird ca. BEARBEITUNGSDAUER in Anspruch nehmen. Sofern Sie an der Universität Heidelberg studieren, können Sie für die Teilnahme VERGÜTUNG bescheinigt bekommen.</div>',
+     '<div class = "normal-text">Im Rahmen des Empras möchten wir Reaktionszeiten bei emotionalen Gesichtern genauer untersuchen.</br>Die Bearbeitung wird ca. 30 in Anspruch nehmen. Sofern Sie an der Universität Heidelberg studieren, können Sie für die Teilnahme 0.5 VPN Stunden bescheinigt bekommen.</div>',
      '<div class = "normal-text"><i>Bitte lesen Sie sich die folgenden Informationen sorgfältig durch.</i></br>Die Teilnahme an dieser Studie erfolgt freiwillig und ist mit keinen Risiken verbunden. Es steht Ihnen jederzeit frei, Ihre Teilnahme zu widerrufen oder abzubrechen, ohne dass hierdurch ein Nachteil für Sie entsteht. Die Studie dient rein wissenschaftlichen Zwecken und hat keinerlei kommerziellen Hintergrund. Ihre Daten werden anonym erfasst und gespeichert, sodass kein Rückschluss auf Ihre Person möglich ist.</br>Wenn Sie Fragen zu dieser Erhebung haben, wenden Sie sich gerne an die Versuchsleiterin vor Ort.</div>',
     ],
     show_clickable_nav: true, 
