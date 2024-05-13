@@ -84,3 +84,21 @@ var instructions = {
     button_label_next: "Weiter",
     button_label_previous: "Zurück",
 }
+
+var subject_number_entry = {
+    type: jsPsychSurveyText,
+    questions: [
+        {prompt: '<div class = "normal-text">Bitte gib hier die Versuchspersonennummer ein:</div>', name: "vpnummer"},
+    ],
+    button_label: "Weiter",
+    data: {type: 'survey'},
+    on_finish: function(data){
+        subject_number = data.response.vpnummer;
+        experiment_file = "data_" + experiment_short_name + "_" + subject_number + "_" + init_time + ".csv"
+        jsPsych.data.addProperties({
+            subject: subject_number,
+            condition: current_condition
+          });
+          
+    }
+}

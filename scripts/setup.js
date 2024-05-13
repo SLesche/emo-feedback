@@ -8,8 +8,8 @@ let jsPsych = initJsPsych(
     */  
 );
 
-const experiment_name = "My Task";
-const experiment_short_name = "my_task";
+const experiment_name = "Face to Face";
+const experiment_short_name = "facetoface";
 let init_date = new Date();
     jsPsych.data.addProperties({
         date: ("0" + init_date.getDate()).slice(-2) + '_' + ("0" + (init_date.getMonth() + 1)).slice(-2) + '_' + init_date.getFullYear(),
@@ -32,7 +32,8 @@ const fixation_dur = 500;
 const inter_trial_interval = 500;
 
 // Remove later
-const subject_number = 1;
+var subject_number = 1;
+var experiment_file = "data_" + experiment_short_name + "_" + subject_number + "_" + init_time + ".csv";
 
 // init values
 var trial_num = 0;
@@ -107,9 +108,3 @@ for (const stimulus in response_mapping) {
 */
 // record the condition assignment in the jsPsych data
 // this adds a property called 'subject' to every trial
-
-jsPsych.data.addProperties({
-  subject: subject_number,
-});
-
-const experiment_file = "./data/" + experiment_short_name + "_" + subject_number + "_" + init_time + ".csv"
