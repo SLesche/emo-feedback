@@ -19,8 +19,8 @@ let init_date = new Date();
 let init_time = init_date.getFullYear() + "_" + (init_date.getMonth() + 1) + "_" + init_date.getDate() + "_" + init_date.getHours() + "_" + init_date.getMinutes() + "_" + init_date.getSeconds()
 let timeline = [];
 
-const n_trials = 18; // 85
-const n_blocks = 10;
+const n_trials = 24; // 24
+const n_blocks = 32;
 const n_practice = 18; //30
 
 const trial_duration = 10000;
