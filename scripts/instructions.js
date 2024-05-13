@@ -96,8 +96,7 @@ var subject_number_entry = {
         subject_number = data.response.vpnummer;
         experiment_file = "data_" + experiment_short_name + "_" + subject_number + "_" + init_time + ".csv"
         jsPsych.data.addProperties({
-            subject: subject_number,
-            condition: current_condition
+            subject: subject_number
           });
           
     }
