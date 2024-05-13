@@ -20,11 +20,11 @@ let init_time = init_date.getFullYear() + "_" + (init_date.getMonth() + 1) + "_"
 let timeline = [];
 
 const n_trials = 18; // 85
-const n_blocks = 32;
+const n_blocks = 10;
 const n_practice = 18; //30
 
 const trial_duration = 10000;
-const stim_duration = 200;
+const stim_duration = 100;
 const mask_duration = 200;
 const feedback_dur = 450;
 const rsi_duration = 500;
